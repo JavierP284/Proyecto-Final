@@ -3,43 +3,53 @@
 #include <Ship.hpp>
 #include <Game.hpp>
 
-std::vector<Ship *> ships;
-
-// Necesitas crear una ventana (sf::RenderWindow) para dibujar en ella.
+std::vector<Ship*> ships;
 sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Window");
-
 sf::Texture spritesheet;
 sf::Sprite invader;
 
 void Load() {
-  if (!spritesheet.loadFromFile("assets/images/SpritesheetSW.png")) {
-    std::cerr << "Failed to load spritesheet!" << std::endl;
-  }
-  invader.setTexture(spritesheet);
-  invader.setTextureRect(sf::IntRect(0, 0, 32, 32));
+    if (!spritesheet.loadFromFile("assets/images/SpritesheetSW.png")) {
+        std::cerr << "Failed to load spritesheet!" << std::endl;
+    }
+    invader.setTexture(spritesheet);
+    invader.setTextureRect(sf::IntRect(0, 0, 32, 32));
+    Invader* inv = new Invader(sf::IntRect(0, 0, 32, 32), {100, 100});
+    ships.push_back(inv);
 }
 
 void Render() {
-  window.draw(invader);
+    for (const auto& s : ships) {
+        window.draw(*s);
+    }
+}
+
+void Update(float dt) {
+    for (auto& s : ships) {
+        s->Update(dt);
+    }
 }
 
 int main() {
-  // Llama a la función Load() para cargar tus recursos.
-  Load();
+    Load();
 
-  while (window.isOpen()) {
-    sf::Event event;
-    while (window.pollEvent(event)) {
-      if (event.type == sf::Event::Closed) {
-        window.close();
-      }
+    sf::Clock clock;
+
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                window.close();
+            }
+        }
+
+        float dt = clock.restart().asSeconds();
+        Update(dt);
+
+        window.clear();
+        Render();
+        window.display();
     }
 
-    // Llama a la función Render() para dibujar en la ventana.
-    window.clear();
-    Render();
-    window.display();
-  }
-
-  return 0;
+    return 0;
 }
