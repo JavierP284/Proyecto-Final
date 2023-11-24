@@ -1,145 +1,45 @@
-#include <SDL.h>
-#include <stdio.h>
+#include <SFML/Graphics.hpp>
+#include <iostream>
+#include <Ship.hpp>
+#include <Game.hpp>
 
-//Screen dimension constants
-const int SCREEN_WIDTH = 1920;
-const int SCREEN_HEIGHT = 1080;
+std::vector<Ship *> ships;
 
-//Starts up SDL and creates window
-bool init();
+// Necesitas crear una ventana (sf::RenderWindow) para dibujar en ella.
+sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Window");
 
-//Loads media
-bool loadMedia();
+sf::Texture spritesheet;
+sf::Sprite invader;
 
-//Frees media and shuts down SDL
-void close();
-
-//The window we'll be rendering to
-SDL_Window* gWindow = NULL;
-	
-//The surface contained by the window
-SDL_Surface* gScreenSurface = NULL;
-
-//The image we will load and show on the screen
-SDL_Surface* gXOut = NULL;
-
-bool init()
-{
-	//Initialization flag
-	bool success = true;
-
-	//Initialize SDL
-	if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
-	{
-		printf( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError() );
-		success = false;
-	}
-	else
-	{
-		//Create window
-		gWindow = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
-		if( gWindow == NULL )
-		{
-			printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
-			success = false;
-		}
-		else
-		{
-			//Get window surface
-			gScreenSurface = SDL_GetWindowSurface( gWindow );
-		}
-	}
-
-	return success;
+void Load() {
+  if (!spritesheet.loadFromFile("assets/images/SpritesheetSW.png")) {
+    std::cerr << "Failed to load spritesheet!" << std::endl;
+  }
+  invader.setTexture(spritesheet);
+  invader.setTextureRect(sf::IntRect(0, 0, 32, 32));
 }
 
-bool loadMedia()
-{
-	//Loading success flag
-	bool success = true;
-
-	//Load splash image
-	gXOut = SDL_LoadBMP( "assets/images/x.bmp" );
-	if( gXOut == NULL )
-	{
-		printf( "Unable to load image %s! SDL Error: %s\n", "assets/images/x.bmp", SDL_GetError() );
-		success = false;
-	}
-
-	return success;
+void Render() {
+  window.draw(invader);
 }
 
-void close()
-{
-	//Deallocate surface
-	SDL_FreeSurface( gXOut );
-	gXOut = NULL;
+int main() {
+  // Llama a la función Load() para cargar tus recursos.
+  Load();
 
-	//Destroy window
-	SDL_DestroyWindow( gWindow );
-	gWindow = NULL;
+  while (window.isOpen()) {
+    sf::Event event;
+    while (window.pollEvent(event)) {
+      if (event.type == sf::Event::Closed) {
+        window.close();
+      }
+    }
 
-	//Quit SDL subsystems
-	SDL_Quit();
-}
+    // Llama a la función Render() para dibujar en la ventana.
+    window.clear();
+    Render();
+    window.display();
+  }
 
-int main( int argc, char* args[] )
-{
-	//Start up SDL and create window
-	if( !init() )
-	{
-		printf( "Failed to initialize!\n" );
-	}
-	else
-	{
-		//Load media
-		if( !loadMedia() )
-		{
-			printf( "Failed to load media!\n" );
-		}
-		else
-		{			
-			//Main loop flag
-			bool quit = false;
-
-			//Event handler
-			SDL_Event e;
-
-			//While application is running
-			while( !quit )
-			{
-				//Handle events on queue
-				while( SDL_PollEvent( &e ) != 0 )
-				{
-					//User requests quit
-					if( e.type == SDL_QUIT )
-					{
-						quit = true;
-					}
-					else if (e.type == SDL_KEYDOWN)
-        			{
-           				 // If a key was pressed
-            			switch (e.key.keysym.sym)
-            			{
-            				case SDLK_x:
-               				 // If the pressed key is 'x', quit the loop
-                			quit = true;
-                			break;
-            			}
-					}
-
-					//Apply the image
-					SDL_BlitSurface( gXOut, NULL, gScreenSurface, NULL );
-			
-					//Update the surface
-					SDL_UpdateWindowSurface( gWindow );
-				}
-			}
-		}
-
-	//Free resources and close SDL
-	close();
-
-	return 0;
-	}
+  return 0;
 }

@@ -1,6 +1,6 @@
-INCLUDE_PATH = -IC:\msys64\mingw64\include\SDL2
+INCLUDE_PATH = -Iinclude -Iotralib
 LIB_PATH = -LC:\msys64\mingw64\lib
-LIBS = -lmingw32 -lSDL2main -lSDL2
+LIBS = -lmingw32 -lsfml-graphics -lsfml-window -lsfml-system
 FLAGS = -w -Wl,-subsystem,windows
 SDL = $(INCLUDE_PATH) $(LIB_PATH) $(LIBS) $(FLAGS)
 
