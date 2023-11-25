@@ -13,13 +13,13 @@ float Invader::speed = 5.0f;
 
 // Define the ships vector for Invader
 void Load() {
-    if (!spritesheet.loadFromFile("assets/images/SpritesheetSW.png")) {
+    if (!spritesheet.loadFromFile("assets/images/SpritesheetSW2.png")) {
         std::cerr << "Failed to load spritesheet!" << std::endl;
     }
 
     // Generate a grid of invaders
     for (int r = 0; r < invaders_rows; ++r) {
-        sf::IntRect rect(0, 0, 32, 32); // Adjust the values accordingly
+        sf::IntRect rect(0, 0, 38, 32); // Adjust the values accordingly
         for (int c = 0; c < invaders_columns; ++c) {
             sf::Vector2f position(100.0f + c * 40.0f, 100.0f + r * 40.0f); // Adjust the values accordingly
             Invader* inv = new Invader(rect, position);

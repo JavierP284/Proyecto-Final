@@ -25,7 +25,7 @@ public:
 
 class Player : public Ship {
 public:
-    Player() : Ship(sf::IntRect(90, 0, 20, 32))
+    Player() : Ship(sf::IntRect(135, 0, 40, 32))
     {
         setPosition({gameHeight * .5f, gameHeight - 32.f});
     }
@@ -33,12 +33,12 @@ public:
     void Update(const float &dt) override {
         Ship::Update(dt);
         // Mueve a la izquierda
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-            move(-50.0f * dt, 0.0f);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+            move(-80.0f * dt, 0.0f);
         }
         // Mueve a la derecha
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-            move(50.0f * dt, 0.0f);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+            move(80.0f * dt, 0.0f);
         }
 
         // Limita la posición vertical para que no baje con el desplazamiento de la ventana
