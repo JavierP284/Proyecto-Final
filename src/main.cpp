@@ -26,6 +26,8 @@ void Load() {
             ships.push_back(inv);
         }
     }
+    Player* player = new Player();
+    ships.push_back(player);
 }
 
 void Render() {
@@ -54,6 +56,8 @@ int main() {
         }
 
         float dt = clock.restart().asSeconds();
+        
+        // Actualiza todas las naves (incluida la del jugador)
         Update(dt);
 
         window.clear();

@@ -22,7 +22,7 @@ public:
     void Update(const float &dt) override
     {
         Ship::Update(dt); // Lamando al metodo de la clase base
-        move(dt * (direction ? 1.0f : -1.0f) * speed, 0);
+        move(dt * (direction ? 5.0f : -5.0f) * speed, 0);
         if ((direction && getPosition().x > gameWidth - 16) ||
             (!direction && getPosition().x < 16))
         {
