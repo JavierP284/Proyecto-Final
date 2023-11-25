@@ -4,10 +4,12 @@
 #include <Game.hpp>
 #include <Invader.hpp>
 
-std::vector<Ship *> ships;
 sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Window");
 sf::Texture spritesheet;
 sf::Sprite invader;
+
+bool Invader::direction = true;
+float Invader::speed = 5.0f;
 
 // Define the ships vector for Invader
 void Load() {
