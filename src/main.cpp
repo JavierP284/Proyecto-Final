@@ -2,18 +2,20 @@
 #include <iostream>
 #include <Ship.hpp>
 #include <Game.hpp>
+#include <Invader.hpp>
 
-std::vector<Ship*> ships;
+std::vector<Ship *> ships;
 sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Window");
 sf::Texture spritesheet;
 sf::Sprite invader;
 
+// Define the ships vector for Invader
 void Load() {
     if (!spritesheet.loadFromFile("assets/images/SpritesheetSW.png")) {
         std::cerr << "Failed to load spritesheet!" << std::endl;
     }
-    invader.setTexture(spritesheet);
-    invader.setTextureRect(sf::IntRect(0, 0, 32, 32));
+
+    // Pass the ships vector to the Invader constructor
     Invader* inv = new Invader(sf::IntRect(0, 0, 32, 32), {100, 100});
     ships.push_back(inv);
 }
