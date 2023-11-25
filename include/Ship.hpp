@@ -22,3 +22,10 @@ public:
     // Update, virtual so can be overrided, but not pure virtual
     virtual void Update(const float &dt){}
 };
+
+class Player : public Ship {
+public:
+  Player();
+  void Update(const float &dt) override;
+};
+

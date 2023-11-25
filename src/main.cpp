@@ -17,9 +17,15 @@ void Load() {
         std::cerr << "Failed to load spritesheet!" << std::endl;
     }
 
-    // Pass the ships vector to the Invader constructor
-    Invader* inv = new Invader(sf::IntRect(0, 0, 32, 32), {100, 100});
-    ships.push_back(inv);
+    // Generate a grid of invaders
+    for (int r = 0; r < invaders_rows; ++r) {
+        sf::IntRect rect(0, 0, 32, 32); // Adjust the values accordingly
+        for (int c = 0; c < invaders_columns; ++c) {
+            sf::Vector2f position(100.0f + c * 40.0f, 100.0f + r * 40.0f); // Adjust the values accordingly
+            Invader* inv = new Invader(rect, position);
+            ships.push_back(inv);
+        }
+    }
 }
 
 void Render() {
