@@ -20,7 +20,7 @@ void Load() {
     }
 
     for (int r = 0; r < invaders_rows; ++r) {
-        sf::IntRect rect(0, 0, 38, 32);
+        sf::IntRect rect(0, 0, 38, 40);
         for (int c = 0; c < invaders_columns; ++c) {
             sf::Vector2f position(100.0f + c * 40.0f, 100.0f + r * 40.0f);
             Invader* inv = new Invader(rect, position);

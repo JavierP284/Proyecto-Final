@@ -25,7 +25,7 @@ public:
 
 class Player : public Ship {
 public:
-    Player() : Ship(sf::IntRect(135, 0, 40, 32))
+    Player() : Ship(sf::IntRect(135, 0, 40, 40))
     {
         setPosition({gameHeight * .5f, gameHeight - 32.f});
     }
