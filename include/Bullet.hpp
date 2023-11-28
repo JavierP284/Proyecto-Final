@@ -13,8 +13,6 @@ protected:
     bool _mode;
 };
 
-// En Bullet.cpp
-#include "Bullet.hpp"
 
 Bullet::Bullet(const sf::Vector2f& pos, const sf::Texture& texture, const bool mode) : _mode(mode) {
     setTexture(texture);
