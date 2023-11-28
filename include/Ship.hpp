@@ -43,9 +43,9 @@ public:
         }
 
         // Dispara balas con la barra espaciadora
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-            Bullet* bullet = new Bullet(getPosition(), spritesheet, false);
-            bullets.push_back(bullet);
+         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+        Bullet* bullet = new Bullet(getPosition() + sf::Vector2f(0, -16), spritesheet, false);
+        bullets.push_back(bullet);
         }
 
         // Limita la posición vertical para que no baje con el desplazamiento de la ventana
