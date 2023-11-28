@@ -13,9 +13,16 @@ protected:
     bool _mode;
 };
 
+// En Bullet.cpp
+#include "Bullet.hpp"
 
 Bullet::Bullet(const sf::Vector2f& pos, const sf::Texture& texture, const bool mode) : _mode(mode) {
     setTexture(texture);
+
+    // Establece el rectángulo de textura según el modo (jugador o enemigo)
+    sf::IntRect textureRect = _mode ? sf::IntRect(0, 0, 105, 8) : sf::IntRect(0, 0, 105, 8);
+    setTextureRect(textureRect);
+
     setPosition(pos);
 }
 

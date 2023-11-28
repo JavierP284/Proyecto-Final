@@ -1,26 +1,26 @@
-#pragma once
+#ifndef SHIP_HPP
+#define SHIP_HPP
+
 #include <SFML/Graphics.hpp>
 #include <Game.hpp>
+#include <Bullet.hpp>
+std::vector<Bullet*> bullets;
 
-class Ship : public sf::Sprite
-{
+class Ship : public sf::Sprite {
 protected:
     sf::IntRect _sprite;
     // Default constructor is hidden
     Ship() {}
 
 public:
-    // Constructor that takes a sprite
     Ship(sf::IntRect ir) : Sprite()
     {
         _sprite = ir;
         setTexture(spritesheet);
         setTextureRect(_sprite);
     };
-    // Pure virtual deconstructor -- makes this an abstract class
     virtual ~Ship() = default;
-    // Update, virtual so can be overrided, but not pure virtual
-    virtual void Update(const float &dt){}
+    virtual void Update(const float &dt) {}
 };
 
 class Player : public Ship {
@@ -32,6 +32,7 @@ public:
 
     void Update(const float &dt) override {
         Ship::Update(dt);
+
         // Mueve a la izquierda
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
             move(-80.0f * dt, 0.0f);
@@ -41,6 +42,12 @@ public:
             move(80.0f * dt, 0.0f);
         }
 
+        // Dispara balas con la barra espaciadora
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+            Bullet* bullet = new Bullet(getPosition(), spritesheet, false);
+            bullets.push_back(bullet);
+        }
+
         // Limita la posición vertical para que no baje con el desplazamiento de la ventana
         sf::Vector2f position = getPosition();
         if (position.y > gameHeight - 32.f) {
@@ -48,3 +55,7 @@ public:
         }
     }
 };
+
+// Declaración del vector bullets
+
+#endif
