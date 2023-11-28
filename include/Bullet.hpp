@@ -20,7 +20,7 @@ Bullet::Bullet(const sf::Vector2f& pos, const sf::Texture& texture, const bool m
     setTexture(texture);
 
     // Establece el rectángulo de textura según el modo (jugador o enemigo)
-    sf::IntRect textureRect = _mode ? sf::IntRect(250, 0, 5, 5) : sf::IntRect(250, 0, 10, 30);
+    sf::IntRect textureRect = _mode ? sf::IntRect(250, 0, 40, 32) : sf::IntRect(280, 0, 40, 32);
     setTextureRect(textureRect);
 
     setPosition(pos);
