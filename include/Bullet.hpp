@@ -19,7 +19,7 @@ protected:
 // En Bullet.cpp
 #include "Bullet.hpp"
 
-Bullet::Bullet(const sf::Vector2f& pos, const sf::Texture& texture, const bool mode) : _mode(mode), _lifetime(0.0f), _maxLifetime(2.0f) {
+Bullet::Bullet(const sf::Vector2f& pos, const sf::Texture& texture, const bool mode) : _mode(mode), _lifetime(0.0f), _maxLifetime(5.0f) {
     setTexture(texture);
 
     // Establece el rectángulo de textura según el modo (jugador o enemigo)
