@@ -1,0 +1,32 @@
+@startuml
+
+Class Bullet{
+
+}
+
+Class Game{
+
+}
+
+Class Invader{
+    +Disparar()
+    +PatronMovimiento()
+}
+Class Ship{
+
+}
+Class Player{
+    +MoverDerecha()
+    +MoverIzquierda()
+    +Disparar()
+}
+Class Background 
+
+Game *-- Player
+Game *-- Ship
+Game *-- Background
+Background *-- Ship
+Background *-- Invader
+Player o-- Ship
+Invader --|> Ship
+Ship o-- Bullet
