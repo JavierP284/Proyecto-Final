@@ -10,12 +10,12 @@ sf::Texture spritesheet;
 sf::Sprite invader;
 sf::Texture backgroundTexture;
 sf::Sprite backgroundSprite;
- // Definición del vector bullets
 
+// Vector de balas
 bool Invader::direction = true;
 float Invader::speed = 5.0f;
 
-// Define the ships vector for Invader
+// Vector de naves
 void Load() {
     if (!backgroundTexture.loadFromFile("assets/images/background.jpg")) {
         std::cerr << "Failed to load background image!" << std::endl;
@@ -42,7 +42,7 @@ void Load() {
 
 void Render() {
     window.draw(backgroundSprite);
-    
+
     for (const auto& s : ships) {
         window.draw(*s);
     }
@@ -53,12 +53,29 @@ void Render() {
 }
 
 void Update(float dt) {
-    for (auto& s : ships) {
-        s->Update(dt);
+    // Actualizar las naves y las balas
+    for (auto it = ships.begin(); it != ships.end(); ) {
+    (*it)->Update(dt);
+
+    // Verificar si es una bala y debe ser destruida
+    Bullet* bullet = dynamic_cast<Bullet*>(*it);
+    if (bullet && bullet->ShouldBeDestroyed()) {
+        delete *it;
+        it = ships.erase(it);
+    } else {
+        ++it;
     }
-    
-    for (auto& bullet : bullets) {
-        bullet->Update(dt);
+}
+
+    // Eliminar balas después del bucle de naves
+    for (auto it = bullets.begin(); it != bullets.end(); ) {
+        (*it)->Update(dt);
+        if ((*it)->ShouldBeDestroyed()) {
+            delete *it;
+            it = bullets.erase(it);
+        } else {
+            ++it;
+        }
     }
 }
 
@@ -76,12 +93,21 @@ int main() {
         }
 
         float dt = clock.restart().asSeconds();
-        
+
         Update(dt);
 
         window.clear();
         Render();
         window.display();
+    }
+
+    // Limpiar la memoria al salir
+    for (auto& s : ships) {
+        delete s;
+    }
+
+    for (auto& bullet : bullets) {
+        delete bullet;
     }
 
     return 0;
