@@ -1,5 +1,4 @@
 @startuml
-
 Class Bullet{
 
 }
@@ -30,3 +29,5 @@ Background *-- Invader
 Player o-- Ship
 Invader --|> Ship
 Ship o-- Bullet
+
+@enduml
