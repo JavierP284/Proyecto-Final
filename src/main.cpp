@@ -8,6 +8,8 @@
 sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Window");
 sf::Texture spritesheet;
 sf::Sprite invader;
+sf::Texture backgroundTexture;
+sf::Sprite backgroundSprite;
  // Definición del vector bullets
 
 bool Invader::direction = true;
@@ -15,6 +17,12 @@ float Invader::speed = 5.0f;
 
 // Define the ships vector for Invader
 void Load() {
+    if (!backgroundTexture.loadFromFile("assets/images/background.jpg")) {
+        std::cerr << "Failed to load background image!" << std::endl;
+    }
+    // Establece la textura para el sprite de fondo
+    backgroundSprite.setTexture(backgroundTexture);
+
     if (!spritesheet.loadFromFile("assets/images/SpritesheetSW2.png")) {
         std::cerr << "Failed to load spritesheet!" << std::endl;
     }
@@ -33,6 +41,8 @@ void Load() {
 }
 
 void Render() {
+    window.draw(backgroundSprite);
+    
     for (const auto& s : ships) {
         window.draw(*s);
     }
