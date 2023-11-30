@@ -1,12 +1,11 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <Nave.hpp>
-#include <Game.hpp>
+#include <Ventana.hpp>
 #include <Invader.hpp>
 #include <Bala.hpp>
 #include <Jugador.hpp>
 
-sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Window");
+Ventana ventana(800, 600, "SFML Window");
 sf::Texture spritesheet;
 sf::Sprite invader;
 sf::Texture backgroundTexture;
@@ -42,14 +41,14 @@ void Load() {
 }
 
 void Render() {
-    window.draw(backgroundSprite);
+    ventana.Draw(backgroundSprite);
 
     for (const auto& s : naves) {
-        window.draw(*s);
+        ventana.Draw(*s);
     }
 
     for (const auto& bala : balas) {
-        window.draw(*bala);
+        ventana.Draw(*bala);
     }
 }
 
@@ -85,11 +84,11 @@ int main() {
 
     sf::Clock clock;
 
-    while (window.isOpen()) {
+    while (ventana.IsOpen()) {
         sf::Event event;
-        while (window.pollEvent(event)) {
+        while (ventana.GetRenderWindow().pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
-                window.close();
+                ventana.Close();
             }
         }
 
@@ -97,9 +96,9 @@ int main() {
 
         Update(dt);
 
-        window.clear();
+        ventana.Clear();
         Render();
-        window.display();
+        ventana.Display();
     }
 
     // Limpiar la memoria al salir
