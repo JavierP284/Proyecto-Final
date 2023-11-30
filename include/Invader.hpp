@@ -1,7 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <Nave.hpp>
-#include <Game.hpp>
 
 std::vector<Nave *> naves;
 class Invader : public Nave

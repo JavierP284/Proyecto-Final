@@ -1,5 +1,4 @@
 #include <SFML/Graphics.hpp>
-#include <Game.hpp>
 #include <Bala.hpp>
 #include <Nave.hpp>
 std::vector<Bala*> balas;
