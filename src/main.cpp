@@ -4,6 +4,7 @@
 #include <Game.hpp>
 #include <Invader.hpp>
 #include <Bullet.hpp>
+#include <Jugador.hpp>
 
 sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Window");
 sf::Texture spritesheet;
@@ -36,8 +37,8 @@ void Load() {
         }
     }
 
-    Player* player = new Player();
-    ships.push_back(player);
+    Jugador* jugador = new Jugador();
+    ships.push_back(jugador);
 }
 
 void Render() {
