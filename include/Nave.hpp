@@ -1,25 +1,25 @@
-#ifndef SHIP_HPP
-#define SHIP_HPP
+#ifndef NAVE_HPP
+#define NAVE_HPP
 
 #include <SFML/Graphics.hpp>
 #include <Game.hpp>
 #include <Bullet.hpp>
 
 
-class Ship : public sf::Sprite {
+class Nave : public sf::Sprite {
 protected:
     sf::IntRect _sprite;
     // Default constructor is hidden
-    Ship() {}
+    Nave() {}
 
 public:
-    Ship(sf::IntRect ir) : Sprite()
+    Nave(sf::IntRect ir) : Sprite()
     {
         _sprite = ir;
         setTexture(spritesheet);
         setTextureRect(_sprite);
     };
-    virtual ~Ship() = default;
+    virtual ~Nave() = default;
     virtual void Update(const float &dt) {}
 };
 #endif

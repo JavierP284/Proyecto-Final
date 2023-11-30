@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <Ship.hpp>
+#include <Nave.hpp>
 #include <Game.hpp>
 #include <Invader.hpp>
 #include <Bullet.hpp>
@@ -33,18 +33,18 @@ void Load() {
         for (int c = 0; c < invaders_columns; ++c) {
             sf::Vector2f position(100.0f + c * 40.0f, 100.0f + r * 40.0f);
             Invader* inv = new Invader(rect, position);
-            ships.push_back(inv);
+            naves.push_back(inv);
         }
     }
 
     Jugador* jugador = new Jugador();
-    ships.push_back(jugador);
+    naves.push_back(jugador);
 }
 
 void Render() {
     window.draw(backgroundSprite);
 
-    for (const auto& s : ships) {
+    for (const auto& s : naves) {
         window.draw(*s);
     }
 
@@ -55,14 +55,14 @@ void Render() {
 
 void Update(float dt) {
     // Actualizar las naves y las balas
-    for (auto it = ships.begin(); it != ships.end(); ) {
+    for (auto it = naves.begin(); it != naves.end(); ) {
     (*it)->Update(dt);
 
     // Verificar si es una bala y debe ser destruida
     Bullet* bullet = dynamic_cast<Bullet*>(*it);
     if (bullet && bullet->ShouldBeDestroyed()) {
         delete *it;
-        it = ships.erase(it);
+        it = naves.erase(it);
     } else {
         ++it;
     }
@@ -103,7 +103,7 @@ int main() {
     }
 
     // Limpiar la memoria al salir
-    for (auto& s : ships) {
+    for (auto& s : naves) {
         delete s;
     }
 

@@ -1,21 +1,21 @@
 #include <SFML/Graphics.hpp>
 #include <Game.hpp>
 #include <Bullet.hpp>
-#include <Ship.hpp>
+#include <Nave.hpp>
 std::vector<Bullet*> bullets;
 
-class Jugador : public Ship {
+class Jugador : public Nave {
 private:
     float shootCooldown;  // Tiempo de enfriamiento entre disparos en segundos
     float timeSinceLastShoot;  // Tiempo transcurrido desde el último disparo
 
 public:
-    Jugador() : Ship(sf::IntRect(135, 0, 40, 40)), shootCooldown(0.5f), timeSinceLastShoot(0.0f) {
+    Jugador() : Nave(sf::IntRect(135, 0, 40, 40)), shootCooldown(0.5f), timeSinceLastShoot(0.0f) {
         setPosition({gameWidth * 0.5f, gameHeight - 32.0f});
     }
 
     void Update(const float &dt) override {
-        Ship::Update(dt);
+        Nave::Update(dt);
 
         // Actualiza el tiempo transcurrido desde el último disparo
         timeSinceLastShoot += dt;
