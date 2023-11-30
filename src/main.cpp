@@ -3,7 +3,7 @@
 #include <Nave.hpp>
 #include <Game.hpp>
 #include <Invader.hpp>
-#include <Bullet.hpp>
+#include <Bala.hpp>
 #include <Jugador.hpp>
 
 sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Window");
@@ -48,8 +48,8 @@ void Render() {
         window.draw(*s);
     }
 
-    for (const auto& bullet : bullets) {
-        window.draw(*bullet);
+    for (const auto& bala : balas) {
+        window.draw(*bala);
     }
 }
 
@@ -59,8 +59,8 @@ void Update(float dt) {
     (*it)->Update(dt);
 
     // Verificar si es una bala y debe ser destruida
-    Bullet* bullet = dynamic_cast<Bullet*>(*it);
-    if (bullet && bullet->ShouldBeDestroyed()) {
+    Bala* bala = dynamic_cast<Bala*>(*it);
+    if (bala && bala->ShouldBeDestroyed()) {
         delete *it;
         it = naves.erase(it);
     } else {
@@ -69,11 +69,11 @@ void Update(float dt) {
 }
 
     // Eliminar balas después del bucle de naves
-    for (auto it = bullets.begin(); it != bullets.end(); ) {
+    for (auto it = balas.begin(); it != balas.end(); ) {
         (*it)->Update(dt);
         if ((*it)->ShouldBeDestroyed()) {
             delete *it;
-            it = bullets.erase(it);
+            it = balas.erase(it);
         } else {
             ++it;
         }
@@ -107,8 +107,8 @@ int main() {
         delete s;
     }
 
-    for (auto& bullet : bullets) {
-        delete bullet;
+    for (auto& bala : balas) {
+        delete bala;
     }
 
     return 0;

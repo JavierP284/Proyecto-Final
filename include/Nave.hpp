@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <Game.hpp>
-#include <Bullet.hpp>
+#include <Bala.hpp>
 
 
 class Nave : public sf::Sprite {

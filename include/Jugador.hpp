@@ -1,8 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <Game.hpp>
-#include <Bullet.hpp>
+#include <Bala.hpp>
 #include <Nave.hpp>
-std::vector<Bullet*> bullets;
+std::vector<Bala*> balas;
 
 class Jugador : public Nave {
 private:
@@ -32,8 +32,8 @@ public:
 
         // Dispara balas con la barra espaciadora si ha pasado el tiempo de enfriamiento
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && timeSinceLastShoot >= shootCooldown) {
-            Bullet* bullet = new Bullet(getPosition() + sf::Vector2f(0, -16), spritesheet, false);
-            bullets.push_back(bullet);
+            Bala* bullet = new Bala(getPosition() + sf::Vector2f(0, -16), spritesheet, false);
+            balas.push_back(bullet);
 
             // Reinicia el tiempo desde el último disparo
             timeSinceLastShoot = 0.0f;
