@@ -4,7 +4,7 @@
 class Bala : public sf::Sprite {
 public:
     Bala(const sf::Vector2f& pos, const sf::Texture& texture, const bool mode);
-    void Update(const float& dt);
+    void Desaparecer(const float& dt);
     ~Bala() = default;
     bool ShouldBeDestroyed() const;
 
@@ -18,13 +18,15 @@ Bala::Bala(const sf::Vector2f& pos, const sf::Texture& texture, const bool mode)
     setTexture(texture);
 
     // Establece el rectángulo de textura según el modo (jugador o enemigo)
-    sf::IntRect textureRect = _mode ? sf::IntRect(250, 0, 40, 32) : sf::IntRect(280, 0, 40, 32);
+    sf::IntRect textureRect = _mode ? sf::IntRect(250, 0, 40, 32) : sf::IntRect(30, 0, 40, 32);
     setTextureRect(textureRect);
 
     setPosition(pos);
 }
 
-void Bala::Update(const float& dt) {
+
+
+void Bala::Desaparecer(const float& dt) {
     move(0, dt * -200.0f * (_mode ? -1.0f : 1.0f));
 
     // Actualiza el tiempo de vida

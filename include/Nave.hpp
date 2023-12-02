@@ -19,6 +19,6 @@ public:
         setTextureRect(_sprite);
     };
     virtual ~Nave() = default;
-    virtual void Update(const float &dt) {}
+    virtual void Pilotar(const float &dt) {}
 };
 #endif

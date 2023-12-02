@@ -1,45 +1,64 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+constexpr int ventanaWidth = 800;
+constexpr int ventanaHeight = 600;
+constexpr int invaders_rows = 5;
+constexpr int invaders_columns = 12;
+
+extern sf::Texture spritesheet;
+
 class Ventana {
 public:
-    Ventana(int width, int height, const std::string& title);
+    Ventana(int width, int height, const char* title);
+    ~Ventana();
 
-    void Clear();
-    void Display();
-    bool IsOpen() const;
-    void Close();
+    void run();
 
-    sf::RenderWindow& GetRenderWindow();
+    void Draw(const sf::Drawable& drawable) {
+        mWindow.draw(drawable);
+    }
 
-    template <typename T>
-    void Draw(const T& drawable) {
-        ventana.draw(drawable);
+    bool IsOpen() const {
+        return mWindow.isOpen();
+    }
+
+    sf::RenderWindow& GetRenderWindow() {
+        return mWindow;
+    }
+
+    void Close() {
+        mWindow.close();
+    }
+
+    void Clear() {
+        mWindow.clear();
+    }
+
+    void Display() {
+        mWindow.display();
     }
 
 private:
-    sf::RenderWindow ventana;
+    void processEvents();
+    void update(sf::Time deltaTime);
+    void render();
+
+    void handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
+
+private:
+    sf::RenderWindow mWindow;
+    sf::Sprite mPlayer;
+    sf::Sprite mInvaders[invaders_rows][invaders_columns];
+    sf::Clock mClock;
 };
 
-Ventana::Ventana(int width, int height, const std::string& title)
-    : ventana(sf::VideoMode(width, height), title) {}
-
-void Ventana::Clear() {
-    ventana.clear();
+// Destructor
+inline Ventana::~Ventana() {
+    // Aquí puedes agregar cualquier lógica de limpieza necesaria
 }
 
-void Ventana::Display() {
-    ventana.display();
-}
-
-bool Ventana::IsOpen() const {
-    return ventana.isOpen();
-}
-
-void Ventana::Close() {
-    ventana.close();
-}
-
-sf::RenderWindow& Ventana::GetRenderWindow() {
-    return ventana;
+// Constructor
+inline Ventana::Ventana(int width, int height, const char* title) : mWindow(sf::VideoMode(width, height), title) {
+    // Aquí puedes agregar cualquier lógica de inicialización necesaria
 }
