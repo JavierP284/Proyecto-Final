@@ -14,8 +14,20 @@ Su jugabilidad es muy simple en esta el jugador se puede desplazar por la pantal
 
 ![Descripcion](assets/images/A.PNG)![Descripcion](assets/images/D.PNG)![Descripcion](assets/images/Space.PNG)
 
+# Como instalar el juego 
+El proyecto esta desarrollado sobre MinGW64 utilizando Msys2
+
+Para instalar msys2 en vscode seguir el siguiente tutorial https://code.visualstudio.com/docs/cpp/config-ming
+
+Libreria que usamos SMFL
+
+https://packages.msys2.org/package/mingw-w64-x86_64-sfml
+
+pacman -S mingw-w64-x86_64-sfml
+
 
 
 # Autores
 Javier Alejandro Perez Nuñoz
+
 Jose Dario Jimenez Hernandez
