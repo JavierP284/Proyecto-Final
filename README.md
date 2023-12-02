@@ -25,9 +25,10 @@ https://packages.msys2.org/package/mingw-w64-x86_64-sfml
 
 pacman -S mingw-w64-x86_64-sfml
 
-
+![Descripcion](assets/images/SFML.PNG)
 
 # Autores
-Javier Alejandro Perez Nuñoz
+Javier Alejandro Perez Nuñoz 22310284
 
-Jose Dario Jimenez Hernandez
+Jose Dario Jimenez Hernandez 22310218
+![Descripcion](assets/images/LogoCeti.PNG)
