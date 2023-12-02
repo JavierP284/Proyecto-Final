@@ -3,20 +3,23 @@ Class Bala{
 
 }
 Class Invader{
-    +Disparar()
-    +Mover
+    +Pilotar()
 }
 Class Nave{
-    +Disparar()
+
 }
 Class Jugador{
-    +MoverDerecha()
-    +MoverIzquierda()
+    +Pilotar()
 }
 Class Ventana{
 
 }
+Class Juego{
+}
 
+Juego *-- Ventana
+Juego *-- Jugador
+Juego *-- Invader
 Jugador o-- Nave
 Invader --|> Nave
 Nave o-- Bala

@@ -2,6 +2,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <Nave.hpp>
+#include <Bala.hpp>
 
 class Invader : public Nave {
 public:
