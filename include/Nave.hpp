@@ -2,8 +2,6 @@
 #define NAVE_HPP
 
 #include <SFML/Graphics.hpp>
-#include <Bala.hpp>
-
 
 class Nave : public sf::Sprite {
 protected:

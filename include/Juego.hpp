@@ -5,7 +5,7 @@
 #include <Invader.hpp>
 #include <Bala.hpp>
 #include <Jugador.hpp>
-std::vector<Bala*> balas;
+
 class Juego {
 public:
     Juego(int ventanaWidth, int ventanaHeight, const char* title);
@@ -81,7 +81,7 @@ void Juego::Load() {
         }
     }
 
-    Jugador* jugador = new Jugador();
+    Jugador* jugador = new Jugador(balas);
     jugador->setTexture(spritesheet);
     naves.push_back(jugador);
 
