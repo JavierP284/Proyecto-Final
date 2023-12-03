@@ -14,6 +14,7 @@ private:
 public:
     // Modify the constructor to take the balas vector as an argument
     Jugador(std::vector<Bala*>& balas) : Nave(sf::IntRect(135, 0, 40, 40)), shootCooldown(0.5f), timeSinceLastShoot(0.0f), balas(balas) {
+         setTexture(spritesheet);
         setPosition({ventanaWidth * 0.5f, ventanaHeight - 32.0f});
     }
 
